@@ -1,3 +1,5 @@
+import API_KEY from './API_KEY.js'
+
 const express = require('express')
 const request = require('request')
 const mysql = require('mysql2')
@@ -7,7 +9,6 @@ const app = express()
 const cors = require('cors')
 
 const port = 8080
-const API_KEY = 'd61dcb0c1f464a939b19bec42779920a'
 const pSize = 1000
 
 app.use(cors())
