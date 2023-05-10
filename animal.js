@@ -137,6 +137,100 @@ app.listen(port, () => {
     const animalData = JSON.parse(body)
     const shelters = {}
 
+    const sponsors = [
+      {
+        name: '매흐시',
+        url: 'https://smartstore.naver.com/mer_ci',
+        content: '수익금 20%, 유기동물 위해 후원됩니다. 당신의 따뜻한 마음이 세상을 위로합니다.',
+        tag: '#유기동물_후원_반지 #유기견_후원_팔찌 #유기묘_기부_목걸이',
+        image: 'https://image.idus.com/image/files/b8cc02f0ff1d479f896d9c7ed1eb2535.jpg',
+      },
+      {
+        name: '메리디아니',
+        url: 'https://meridiani.co.kr/',
+        content: '대한민국 대표 유기견후원 브랜드 메리디아니! 유기견을 돕기 위한 귀여운 후원품!',
+        tag: '#유기견_후원_팔찌 #유기동물_후원_폰스트랩 #케이스 #가방 #그립톡',
+        image: 'https://meridiani2.cafe24.com/design/mainpage/img2.jpg',
+      },
+      {
+        name: '마르코로호',
+        url: 'https://marcoroho.com/',
+        content: '위기 동물 구호 지원 반지&팔찌, 사이즈 맞춤 제작, 할머니가 만드는 매듭 소품',
+        tag: '#매듭소품 #봉제소품 #문구소품 #뜨개소품 #주문제작',
+        image: 'https://m.marcoroho.com/file_data/marcoroho/2020/12/16/dafe1bf930f497f64def5b620f340b54.jpg',
+      },
+      {
+        name: '마을과 고양이',
+        url: 'https://villagencat.modoo.at/',
+        content: '길고양이 후원 마을과 고양이. 고양이는 사랑입니다. 사람도 동물도 함께 건강하고 행복한 마을을 꿈꿉니다.',
+        tag: '#길고양이_후원_스마트톡 #길고양이_후원_담요 #길고양이_후원_엽서',
+        image: 'https://modo-phinf.pstatic.net/20191018_72/1571343240880KHhot_PNG/mosa8KtV0j.png?type=f320_320',
+      },
+      {
+        name: '메종드오브젝트',
+        url: 'https://smartstore.naver.com/ojtbusan',
+        content: '사지 말고 사랑으로 입양하세요. 유기동물후원브랜드, 동물들에겐 많은 분들의 작은 손길이 필요합니다.',
+        tag: '#유기견_후원_팔찌 #유기동물_코인_팔찌 #유기동물_실버_오픈링',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8FshxIViD1XGJxpV2P5NFlsYJ8x13OXkn-w&usqp=CAU',
+      },
+      {
+        name: '기프트폴독',
+        url: 'https://smartstore.naver.com/gjftfordog2022',
+        content: '유기견 후원 액세서리 브랜드 Gift for Dog – 강아지를 위한 선물',
+        tag: '#유기견_후원_써지컬팔찌 #유기견_후원_원석팔찌 #유기견_후원_목걸이',
+        image: 'https://shop-phinf.pstatic.net/20220907_149/1662545840050dJykU_JPEG/a.jpg?type=w640',
+      },
+      {
+        name: '메리골드',
+        url: 'https://smartstore.naver.com/marigold_gongbang',
+        content: '유기동물에게 행복을 전달하는 후원 악세서리 마켓 메리골드입니다.',
+        tag: '#유기견_기부반지 #유기묘_기부반지',
+        image: 'https://image.idus.com/image/files/c4c29ba4b16748b98c063c55550190fa.jpg',
+      },
+      {
+        name: '베러프레젠트',
+        url: 'https://smartstore.naver.com/wishpedia',
+        content: '더 나은 현재를 선물해요. 유기동물 후원 브랜드 ‘Better Present’',
+        tag: '#유기동물_후원_반지 #유기동물_후원_뺏지 #유기견_후원_목걸이',
+        image: 'https://shop-phinf.pstatic.net/20210112_57/1610451100881KmTWJ_JPEG/596ae4d0-d2d4-424b-9ef2-5c874a2ca0b9.jpg?type=w640',
+      },
+      {
+        name: '해나달',
+        url: 'https://smartstore.naver.com/hannahdal',
+        content: '따뜻한 마음으로 희망을 전달하겠습니다.',
+        tag: '#유기견_후원_기부팔찌 #유기견_후원_반지 #유기견_후원_목걸이',
+        image: 'https://shop-phinf.pstatic.net/20221113_276/1668316990475KmOVo_PNG/%C1%A6%B8%F1-%BE%F8%C0%BD-1.png?type=w640',
+      },
+      {
+        name: '손, 잡아줄게',
+        url: 'https://smartstore.naver.com/handofdonor',
+        content: '당신의 따뜻한 마음을 전달합니다. 손, 잡아줄게',
+        tag: '#후원_액세서리 #유기견_유기묘_후원_팔찌 #유기견_유기묘_후원_반지',
+        image: 'https://image.idus.com/image/files/3770f279eb9e4817aca744e7e767c0e6.jpg',
+      },
+      {
+        name: '우리가 지켜줄 개',
+        url: 'https://smartstore.naver.com/woojigae',
+        content: '“우리가 지켜줄 게” 유기동물을 위한 착한 소비에 동참해주세요.',
+        tag: '#유기동물_후원_반지 #유기동물_후원_그립톡',
+        image: 'https://shop-phinf.pstatic.net/20211110_206/1636510762728CpgpP_PNG/%C1%A6%B8%F1%C0%BB-%C0%D4%B7%C2%C7%D8%C1%D6%BC%BC%BF%E4_-001_%283%29.png?type=w640',
+      },
+    ]
+
+    for(let i = 0; i < sponsors.length; i++) {
+      connection.query(
+        'INSERT INTO sponsor (sponsor_name, url, content, tag, image) VALUES (?, ?, ?, ?, ?)',
+        [sponsors[i].name, sponsors[i].url, sponsors[i].content, sponsors[i].tag, sponsors[i].image],
+        (err, results) => {
+          if(err || results.length === 0) {
+            console.log(err)
+            return
+          }
+          console.log('Sponsor created.')
+        }
+      )
+    }
+
     for(let i = 0; i < pSize; i++) {
       const animal = animalData['AbdmAnimalProtect'][1]['row'][i]
 
