@@ -21,8 +21,7 @@ app.get('/getAnimalData/:id', (req, res) => {
   connection.query('SELECT * FROM animal WHERE abdn_id=?', [id], (err, results) => {
     if (err || results.length === 0) {
       console.log('Error getting animal.')
-      console.log(err)
-      // res.status(500).send(err)
+      res.status(500).send(err)
       return
     }
     console.log('Animal retrieved.')
@@ -44,8 +43,29 @@ app.get('/getShelterData/:region', (req, res) => {
 })
 
 app.get('/getAnimalListData/newDate', (req, res) => {
-  const page = req.params.page
-  connection.query('SELECT * FROM animal ORDER BY pblanc_begin_de DESC', (err, results) => {
+  const dog = JSON.parse(req.query.dog)
+  const cat = JSON.parse(req.query.cat)
+  const etc = JSON.parse(req.query.etc)
+  let query = 'SELECT * FROM animal ORDER BY pblanc_begin_de DESC'
+
+  if(!dog && !cat && !etc) {
+    res.send([])
+    return
+  } else if(dog && !cat && !etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%개%' ORDER BY pblanc_begin_de DESC"
+  } else if(!dog && cat && !etc) { 
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%고양이%' ORDER BY pblanc_begin_de DESC"
+  } else if(!dog && !cat && etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%기타축종%' ORDER BY pblanc_begin_de DESC"
+  } else if(dog && cat && !etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%개%' OR species_nm LIKE '%고양이%' ORDER BY pblanc_begin_de DESC"
+  } else if(!dog && cat && etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%고양이%' OR species_nm LIKE '%기타축종%' ORDER BY pblanc_begin_de DESC"
+  } else if(dog && !cat && etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%개%' OR species_nm LIKE '%기타축종%' ORDER BY pblanc_begin_de DESC"
+  }
+
+  connection.query(query, (err, results) => {
     if (err || results.length === 0) {
       console.log('Error getting animal.')
       res.status(500).send(err)
@@ -57,8 +77,29 @@ app.get('/getAnimalListData/newDate', (req, res) => {
 })
 
 app.get('/getAnimalListData/oldDate', (req, res) => {
-  const page = req.params.page
-  connection.query('SELECT * FROM animal ORDER BY pblanc_begin_de', (err, results) => {
+  const dog = JSON.parse(req.query.dog)
+  const cat = JSON.parse(req.query.cat)
+  const etc = JSON.parse(req.query.etc)
+  let query = 'SELECT * FROM animal ORDER BY pblanc_begin_de'
+
+  if(!dog && !cat && !etc) {
+    res.send([])
+    return
+  } else if(dog && !cat && !etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%개%' ORDER BY pblanc_begin_de"
+  } else if(!dog && cat && !etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%고양이%' ORDER BY pblanc_begin_de"
+  } else if(!dog && !cat && etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%기타축종%' ORDER BY pblanc_begin_de"
+  } else if(dog && cat && !etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%개%' OR species_nm LIKE '%고양이%' ORDER BY pblanc_begin_de"
+  } else if(!dog && cat && etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%고양이%' OR species_nm LIKE '%기타축종%' ORDER BY pblanc_begin_de"
+  } else if(dog && !cat && etc) {
+    query = "SELECT * FROM animal WHERE species_nm LIKE '%개%' OR species_nm LIKE '%기타축종%' ORDER BY pblanc_begin_de"
+  }
+
+  connection.query(query, (err, results) => {
     if (err || results.length === 0) {
       console.log('Error getting animal.')
       res.status(500).send(err)
