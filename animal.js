@@ -1,5 +1,4 @@
-import API_KEY from './API_KEY.js'
-
+const API_KEY = require('./API_KEY.js')
 const express = require('express')
 const request = require('request')
 const mysql = require('mysql2')
@@ -97,7 +96,7 @@ app.listen(port, () => {
     const animalData = JSON.parse(body)
     const shelters = {}
 
-    for (let i = 0; i < pSize; i++) {
+    for(let i = 0; i < pSize; i++) {
       const animal = animalData['AbdmAnimalProtect'][1]['row'][i]
 
       const abdn_id = animal['ABDM_IDNTFY_NO']
@@ -131,7 +130,7 @@ app.listen(port, () => {
           'INSERT INTO shelter (shter_nm, shter_telno, protect_plc, jurisd_inst_nm) VALUES (?, ?, ?, ?)',
           [shter_nm, shter_telno, protect_plc, jurisd_inst_nm],
           (err, results) => {
-            if (err || results.length === 0) {
+            if(err || results.length === 0) {
               console.log(err)
               return
             }
@@ -157,7 +156,7 @@ app.listen(port, () => {
           shter_id,
         ],
         (err, results) => {
-          if (err || results.length === 0) {
+          if(err || results.length === 0) {
             console.log(err)
             return
           }
