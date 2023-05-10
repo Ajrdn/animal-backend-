@@ -16,16 +16,27 @@ app.get('/', (req, res) => {
   res.send('Animal API')
 })
 
-app.get('/getAnimalData/:id', (req, res) => {
-  const id = req.params.id
-  connection.query('SELECT * FROM animal WHERE abdn_id=?', [id], (err, results) => {
-    if (err || results.length === 0) {
-      console.log('Error getting animal.')
+app.get('/getSponsorData', (req, res) => {
+  connection.query('SELECT * FROM sponsor', (err, results) => {
+    if(err || results.length === 0) {
+      console.log('Error getting sponsor.')
       res.status(500).send(err)
       return
     }
-    console.log('Animal retrieved.')
-    res.send(results[0])
+    console.log('Sponsor retrieved.')
+    res.send(results)
+  })
+})
+
+app.get('/getShelterData', (req, res) => {
+  connection.query('SELECT * FROM shelter', (err, results) => {
+    if(err || results.length === 0) {
+      console.log('Error getting shelter.')
+      res.status(500).send(err)
+      return
+    }
+    console.log('Shelter retrieved.')
+    res.send(results)
   })
 })
 
@@ -39,6 +50,19 @@ app.get('/getShelterData/:region', (req, res) => {
     }
     console.log('Shelter retrieved.')
     res.send(results)
+  })
+})
+
+app.get('/getAnimalData/:id', (req, res) => {
+  const id = req.params.id
+  connection.query('SELECT * FROM animal WHERE abdn_id=?', [id], (err, results) => {
+    if (err || results.length === 0) {
+      console.log('Error getting animal.')
+      res.status(500).send(err)
+      return
+    }
+    console.log('Animal retrieved.')
+    res.send(results[0])
   })
 })
 
@@ -106,18 +130,6 @@ app.get('/getAnimalListData/oldDate', (req, res) => {
       return
     }
     console.log('Animal retrieved.')
-    res.send(results)
-  })
-})
-
-app.get('/getShelterData', (req, res) => {
-  connection.query('SELECT * FROM shelter', (err, results) => {
-    if(err || results.length === 0) {
-      console.log('Error getting shelter.')
-      res.status(500).send(err)
-      return
-    }
-    console.log('Shelter retrieved.')
     res.send(results)
   })
 })
