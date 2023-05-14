@@ -158,20 +158,6 @@ app.listen(port, () => {
         image: 'https://image.idus.com/image/files/b8cc02f0ff1d479f896d9c7ed1eb2535.jpg',
       },
       {
-        name: '메리디아니',
-        url: 'https://meridiani.co.kr/',
-        content: '대한민국 대표 유기견후원 브랜드 메리디아니! 유기견을 돕기 위한 귀여운 후원품!',
-        tag: '#유기견_후원_팔찌 #유기동물_후원_폰스트랩 #케이스 #가방 #그립톡',
-        image: 'https://meridiani2.cafe24.com/design/mainpage/img2.jpg',
-      },
-      {
-        name: '마르코로호',
-        url: 'https://marcoroho.com/',
-        content: '위기 동물 구호 지원 반지&팔찌, 사이즈 맞춤 제작, 할머니가 만드는 매듭 소품',
-        tag: '#매듭소품 #봉제소품 #문구소품 #뜨개소품 #주문제작',
-        image: 'https://m.marcoroho.com/file_data/marcoroho/2020/12/16/dafe1bf930f497f64def5b620f340b54.jpg',
-      },
-      {
         name: '마을과 고양이',
         url: 'https://villagencat.modoo.at/',
         content: '길고양이 후원 마을과 고양이. 고양이는 사랑입니다. 사람도 동물도 함께 건강하고 행복한 마을을 꿈꿉니다.',
