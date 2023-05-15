@@ -138,6 +138,18 @@ app.get('/getTotalAnimal', (req, res) => {
   res.send(pSize.toString())
 })
 
+app.get('/getDayTotalAnimal', (req, res) => {
+  connection.query("SELECT DATE_FORMAT(pblanc_begin_de, '%m/%d') AS pblanc_begin_de FROM animal GROUP BY pblanc_begin_de ORDER BY pblanc_begin_de", (err, results) => {
+    if (err || results.length === 0) {
+      console.log('Error getting animal.')
+      res.status(500).send(err)
+      return
+    }
+    console.log('Animal retrieved.')
+    res.send(results)
+  })
+})
+
 app.listen(port, () => {
   const options = {
     uri: 'https://openapi.gg.go.kr/AbdmAnimalProtect',
