@@ -139,7 +139,7 @@ app.get('/getTotalAnimal', (req, res) => {
 })
 
 app.get('/getDayTotalAnimal', (req, res) => {
-  connection.query("SELECT DATE_FORMAT(pblanc_begin_de, '%m/%d') AS pblanc_begin_de FROM animal GROUP BY pblanc_begin_de ORDER BY pblanc_begin_de", (err, results) => {
+  connection.query("SELECT DATE_FORMAT(pblanc_begin_de, '%m/%d') AS pblanc_begin_de, COUNT(*) AS count FROM animal GROUP BY pblanc_begin_de ORDER BY pblanc_begin_de", (err, results) => {
     if (err || results.length === 0) {
       console.log('Error getting animal.')
       res.status(500).send(err)
