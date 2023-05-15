@@ -150,6 +150,18 @@ app.get('/getDayTotalAnimal', (req, res) => {
   })
 })
 
+app.get('/getGenderTotalAnimal', (req, res) => {
+  connection.query('SELECT sex_nm, COUNT(*) AS count FROM animal GROUP BY sex_nm', (err, results) => {
+    if (err || results.length === 0) {
+      console.log('Error getting animal.')
+      res.status(500).send(err)
+      return
+    }
+    console.log('Animal retrieved.')
+    res.send(results)
+  })
+})
+
 app.listen(port, () => {
   const options = {
     uri: 'https://openapi.gg.go.kr/AbdmAnimalProtect',
