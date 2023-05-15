@@ -134,6 +134,10 @@ app.get('/getAnimalListData/oldDate', (req, res) => {
   })
 })
 
+app.get('/getTotalAnimal', (req, res) => {
+  res.send(pSize.toString())
+})
+
 app.listen(port, () => {
   const options = {
     uri: 'https://openapi.gg.go.kr/AbdmAnimalProtect',
