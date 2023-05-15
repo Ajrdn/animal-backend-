@@ -162,6 +162,18 @@ app.get('/getGenderTotalAnimal', (req, res) => {
   })
 })
 
+app.get('/getBreedTotalAnimal', (req, res) => {
+  connection.query("SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(species_nm, '[', -1), ']', 1) AS breed, COUNT(*) AS count FROM animal GROUP BY breed", (err, results) => {
+    if (err || results.length === 0) {
+      console.log('Error getting animal.')
+      res.status(500).send(err)
+      return
+    }
+    console.log('Animal retrieved.')
+    res.send(results)
+  })
+})
+
 app.listen(port, () => {
   const options = {
     uri: 'https://openapi.gg.go.kr/AbdmAnimalProtect',
